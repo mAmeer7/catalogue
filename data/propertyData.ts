@@ -18,6 +18,16 @@ export const properties = [
         "Finally, a core tenet would be the promotion of intergenerational learning, intentionally creating opportunities for residents of all ages to interact, share their unique perspectives, and learn from one another, thereby nurturing a supportive and intellectually stimulating community fabric within each development. In essence, the Luminous Path Building Society would be dedicated to constructing not just buildings, but dynamic living environments that actively inspire intellectual curiosity, foster collaboration, and champion a continuous pursuit of knowledge among all its residents, transforming these living spaces into true hubs of learning and growth.."],
 
     },
+    builderDetails: {
+      name: "Gray Developments",
+      details: ["Elysian Developments is a visionary real estate development firm headquartered in Dubai, dedicated to crafting world-class luxury living experiences. Renowned for its commitment to design excellence, sustainability, and exclusivity, Elysian specializes in premium waterfront and island-based residential projects that redefine the standards of modern living. Each development under the Elysian name is a harmonious blend of cutting-edge architecture, artisanal craftsmanship, and curated lifestyle amenities tailored for the global elite.",
+
+        "Driven by a philosophy that prioritizes timeless value over trends, Elysian Developments partners with leading architects, designers, and consultants to bring ambitious concepts to life. From serene private islands to urban luxury enclaves, their projects consistently stand out for their attention to detail, iconic locations, and lasting investment appeal.",
+
+        "Elysian Developments partners with leading architects, designers, and consultants to bring ambitious concepts to life. From serene private islands to urban luxury enclaves, their projects consistently stand out for their attention to detail, iconic locations, and lasting investment appeal."
+      ],
+      backgroundImage: '/bg/bg2.jpg'
+    },
     areaDetails: {
       location: "Amali Island",
       details: ["Amali Island is an extraordinary development set within the iconic World Islands, designed for those who seek the pinnacle of luxury and exclusivity. This private island offers a limited collection of ultra-premium villas, each crafted with architectural excellence and a deep connection to nature. Surrounded by crystal-clear waters and panoramic views of the Dubai skyline, Amali redefines what it means to live in harmony with elegance and privacy.",

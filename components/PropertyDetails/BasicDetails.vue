@@ -1,9 +1,21 @@
 <script setup>
-// Import icons from Nuxt Icon if you have it installed
-// If not, you'll need to create or import these icons
+import { ref, computed, onMounted } from 'vue'
 
 const props = defineProps({
   details: Object
+})
+
+const showAll = ref(false)
+const maxItems = 1
+const isMobile = ref(false)
+
+onMounted(() => {
+  isMobile.value = window.innerWidth < 768 // read more check
+})
+
+const visibleDetails = computed(() => {
+  if (!isMobile.value) return props.details.details
+  return showAll.value ? props.details.details : props.details.details.slice(0, maxItems)
 })
 
 
@@ -93,9 +105,22 @@ const IconPercentage = defineComponent({
 
       <!-- Description -->
       <div class="space-y-4 text-gray-200  lg:w-[60vw]">
-        <p v-for="(item, index) in details?.details" :key="index" class="font-figtree font-regular">
-          {{ item }}
-        </p>
+        <p
+      v-for="(item, index) in visibleDetails"
+      :key="index"
+      class="font-figtree font-regular"
+    >
+      {{ item }}
+    </p>
+
+    <!-- Show button only on mobile and if items are more than max -->
+    <button
+      v-if="isMobile && props.details.details.length > maxItems"
+      @click="showAll = !showAll"
+      class="text-white underline mt-2"
+    >
+      {{ showAll ? 'Show Less' : 'Read More' }}
+    </button>
 
       </div>
     </div>

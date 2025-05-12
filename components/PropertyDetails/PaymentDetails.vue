@@ -25,7 +25,7 @@ const props = defineProps({
             background: `linear-gradient(to bottom right, black, ${dynamicColor})`
         }"></div>
 
-        <div class="relative container px-2 lg:px-10 py-1 lg:py-8">
+        <div class="relative container px-5 lg:px-10 py-1 lg:py-8">
             <h2 class="text-[22px] lg:text-[48px] font-figtree font-bold my-10">Payment Plan</h2>
             <div class="lg:max-w-[60vw] w-[10%]  w-full">
                 <PaymentPlan :paymentItems="props?.paymentPlanData" :dynamicBgColor="props?.dynamicColor" />
