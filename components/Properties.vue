@@ -41,12 +41,15 @@ import CommonDetails from './PropertyDetails/CommonDetails.vue'
       :max-cards="9" @update:favorites="() => {}" :dynamicColor="property.dynamicColor" />
 
     <!-- Constructor Details -->
-    <ConstructerDetails :dynamicColor="property.dynamicColor" />
+    <ConstructerDetails 
+    v-if="property?.builderDetails"
+    :builder="property?.builderDetails"
+    :dynamicColor="property.dynamicColor" />
 
 
 
     <!-- Payment Plan -->
-    <PaymentDetails v-if="property.paymentPlanData" :dynamicColor="property.dynamicColor"
+    <PaymentDetails v-if="property.paymentPlanData" :dynamicColor="property.dynamicColor" :backgroundImage="property?.paymentBackground"
       :paymentPlanData="property.paymentPlanData" />
   </div>
 </template>

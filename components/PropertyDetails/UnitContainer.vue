@@ -77,7 +77,7 @@
 <template>
   <div>
     <div v-for="(group, groupIndex) in unitGroups" :key="groupIndex"
-      class="relative h-screen bg-cover bg-center bg-no-repeat py-20  text-white"
+      class="relative lg:h-screen bg-cover bg-center bg-no-repeat py-10 lg:py-16  text-white"
       :style="{ backgroundImage: `url('/bg/bg4.jpg')` }">
       <!-- Overlay -->
       <div class="absolute inset-0 opacity-70 z-1" :style="{
@@ -86,7 +86,7 @@
 
       <!-- Content Wrapper -->
       <div class="relative z-10 max-w-full mx-10 ">
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-10">{{ title }}</h2>
+        <h2 class="text-[22px] lg:text-[48px] font-bold text-white mb-10">{{ title }}</h2>
 
 
 

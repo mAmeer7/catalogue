@@ -59,10 +59,10 @@ const IconPercentage = defineComponent({
           <span class="text-4xl font-bold">{{ details?.id }}</span>
         </div>
         <div>
-          <h1 class="text-4xl md:text-5xl font-figtree font-bold">{{ details?.name }}</h1>
+          <h1 class="text-[22px] lg:text-[48px] md:text-5xl font-figtree font-bold">{{ details?.name }}</h1>
           <div class="flex items-center mt-1 text-gray-300">
             <IconMapPin class="w-5 h-5 mr-1" />
-            <span class="font-figtree font-regular text-[32px]">{{ details?.location }}</span>
+            <span class="font-figtree font-regular lg:text-[32px]">{{ details?.location }}</span>
           </div>
         </div>
       </div>

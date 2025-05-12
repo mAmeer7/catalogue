@@ -20,11 +20,11 @@ const props = defineProps({
         }"></div>
 
         <!-- Main Content -->
-        <div class="relative z-10 max-w-6xl mx-5 lg:px-6  py-16">
+        <div class="relative z-10 max-w-6xl mx-5 lg:px-6  py-10 lg:py-16">
             <!-- Header -->
             <div class="flex items-start mb-[80px]">
                 <div>
-                    <h1 class="text-4xl md:text-5xl font-figtree  font-bold">{{ details?.location }}</h1>
+                    <h1 class="text-[22px] lg:text-[48px] font-figtree  font-bold">{{ details?.location }}</h1>
                 </div>
             </div>
 
