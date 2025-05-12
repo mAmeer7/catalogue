@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@nuxtjs/google-fonts',
-    'nuxt-easy-lightbox'
+    'nuxt-easy-lightbox',
   ],
 
   googleFonts: {
@@ -15,7 +15,6 @@ export default defineNuxtConfig({
       Figtree: [100, 300, 400, 500, 600, 700, 800, 900], 
     }
    },
-
   image: {
     dir: 'public'
   }

@@ -75,14 +75,14 @@ const getImageIndex = (chunkIndex, imagePosition) => {
       <!-- Layout for 2 images (two equal columns) -->
       <div v-else-if="chunk.length === 2" class="flex flex-col md:flex-row gap-4 p-6 md:p-12">
         <div class="w-full md:w-1/2">
-          <div class="lg:h-[580px] rounded-3xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+          <div class="lg:h-[580px] h-[250px]  rounded-3xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
             @click="showLightbox(getImageIndex(chunkIndex, 0))">
             <img :src="chunk[0].src" :alt="chunk[0].alt || 'Architecture image'"
               class="w-full h-full object-cover" />
           </div>
         </div>
         <div class="w-full md:w-1/2">
-          <div class="lg:h-[580px] rounded-3xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+          <div class="lg:h-[580px] h-[250px]  rounded-3xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
             @click="showLightbox(getImageIndex(chunkIndex, 1))">
             <img :src="chunk[1].src" :alt="chunk[1].alt || 'Architecture image'"
               class="w-full h-full object-cover" />
@@ -91,10 +91,10 @@ const getImageIndex = (chunkIndex, imagePosition) => {
       </div>
 
       <!-- Default layout for 3 images (2/3 + 1/3 with stacked images) -->
-      <div v-else class="flex flex-col md:flex-row gap-4 p-6 md:p-12">
+      <div v-else class="flex flex-col md:flex-row gap-6 p-6 md:p-12">
         <!-- Main large image (left side) -->
         <div class="w-full md:w-1/2 md:flex md:justify-end">
-          <div class="lg:h-[580px] lg:w-full rounded-3xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+          <div class="lg:h-[580px] h-[250px]  lg:w-full rounded-3xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
             @click="showLightbox(getImageIndex(chunkIndex, 0))">
             <img :src="chunk[0].src" :alt="chunk[0].alt || 'Architecture image'"
               class="w-full h-full object-cover" />
@@ -103,12 +103,12 @@ const getImageIndex = (chunkIndex, imagePosition) => {
 
         <!-- Two stacked images (right side) -->
         <div class="w-full lg:w-1/2 flex flex-col gap-6">
-          <div class="lg:h-[280px] lg:w-full rounded-3xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+          <div class="lg:h-[280px] h-[250px]  lg:w-full rounded-3xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
             @click="showLightbox(getImageIndex(chunkIndex, 1))">
             <img :src="chunk[1].src" :alt="chunk[1].alt || 'Architecture image'"
               class="w-full h-full object-cover" />
           </div>
-          <div class="lg:h-[280px] lg:w-full rounded-3xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+          <div class="lg:h-[280px] h-[250px]  lg:w-full rounded-3xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
             @click="showLightbox(getImageIndex(chunkIndex, 2))">
             <img :src="chunk[2].src" :alt="chunk[2].alt || 'Architecture image'"
               class="w-full h-full object-cover" />

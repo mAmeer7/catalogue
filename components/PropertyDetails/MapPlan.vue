@@ -86,7 +86,7 @@ const showLightbox = (item) => {
     <div v-for="(chunk, index) in itemChunks" :key="index" class="relative z-10">
       <!-- Layout for 1 item (full width) -->
       <div v-if="chunk.length === 1" class="p-6 md:p-12">
-        <div class="w-full lg:h-[580px] rounded-3xl overflow-hidden">
+        <div class="w-full lg:h-[580px] h-[300px] rounded-3xl overflow-hidden">
           <!-- Single image with lightbox support -->
           <img v-if="isImage(chunk[0])" 
             :src="chunk[0].src" 
@@ -107,7 +107,7 @@ const showLightbox = (item) => {
       <div v-else-if="chunk.length === 2" class="flex flex-col md:flex-row gap-4 p-6 md:p-12">
         <!-- First item -->
         <div class="w-full md:w-1/2">
-          <div class="lg:h-[580px] rounded-3xl overflow-hidden">
+          <div class="lg:h-[580px] h-[300px] rounded-3xl overflow-hidden">
             <!-- First image with lightbox support -->
             <img v-if="isImage(chunk[0])" 
               :src="chunk[0].src" 
@@ -127,7 +127,7 @@ const showLightbox = (item) => {
 
         <!-- Second item -->
         <div class="w-full md:w-1/2">
-          <div class="lg:h-[580px] rounded-3xl overflow-hidden">
+          <div class="lg:h-[580px] h-[300px] rounded-3xl overflow-hidden">
             <!-- Second image with lightbox support -->
             <img v-if="isImage(chunk[1])" 
               :src="chunk[1].src" 
@@ -150,7 +150,7 @@ const showLightbox = (item) => {
       <div v-else class="flex flex-col md:flex-row gap-6 p-6 md:p-12">
         <!-- Main large item (left side) -->
         <div class="w-full md:w-1/2 md:flex md:justify-end">
-          <div class="lg:h-[580px] lg:w-[720px] rounded-3xl overflow-hidden">
+          <div class="lg:h-[580px] h-[300px] lg:w-[720px] rounded-3xl overflow-hidden">
             <!-- First image with lightbox support -->
             <img v-if="isImage(chunk[0])" 
               :src="chunk[0].src" 
@@ -170,7 +170,7 @@ const showLightbox = (item) => {
 
         <!-- Two stacked items (right side) -->
         <div class="w-full lg:w-1/2 flex flex-col gap-6">
-          <div class="lg:h-[280px] lg:w-[570px] rounded-3xl overflow-hidden">
+          <div class="lg:h-[280px] h-[300px] lg:w-[570px] rounded-3xl overflow-hidden">
             <!-- Second image with lightbox support -->
             <img v-if="isImage(chunk[1])" 
               :src="chunk[1].src" 
@@ -186,7 +186,7 @@ const showLightbox = (item) => {
               class="w-full h-full" 
             />
           </div>
-          <div class="lg:h-[280px] lg:w-[570px] rounded-3xl overflow-hidden">
+          <div class="lg:h-[280px] h-[300px]  lg:w-[570px] rounded-3xl overflow-hidden">
             <!-- Third image with lightbox support -->
             <img v-if="isImage(chunk[2])" 
               :src="chunk[2].src" 
