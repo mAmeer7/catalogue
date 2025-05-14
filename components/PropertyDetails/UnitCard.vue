@@ -74,7 +74,7 @@
         <div>
           <div class="mb-4">
             <div class="flex flex-row  gap-2">
-              <NuxtImg width="14" alt="icon" src="/icons/building-03.svg" />
+              <img width="14" alt="icon" src="/icons/building-03.png" />
               <span class="text-gray-200 font-figtree font-regular text-sm">Type</span>
             </div>
             <p class="font-medium  font-figtree text-white">{{ unit.type }}</p>
@@ -82,7 +82,7 @@
 
           <div class="mb-4">
             <div class="flex flex-row  gap-2">
-              <NuxtImg width="14" alt="icon" src="/icons/elements.svg" />
+              <img width="14" alt="icon" src="/icons/elements.svg" />
               <span class="text-gray-200 font-figtree font-regular text-sm">Size</span>
             </div>
 
@@ -91,7 +91,7 @@
 
           <div>
             <div class="flex flex-row  gap-2">
-              <NuxtImg width="14" alt="icon" src="/icons/money-01.svg" />
+              <img width="14" alt="icon" src="/icons/money-01.svg" />
               <span class="text-gray-200 font-figtree font-regular text-sm">Price per sqft</span>
             </div>
 
@@ -104,7 +104,7 @@
           <div class="mb-4">
 
             <div class="flex flex-row  gap-2">
-              <NuxtImg width="14" alt="icon" src="/icons/layout-07.svg" />
+              <img width="14" alt="icon" src="/icons/layout-07.svg" />
               <span class="text-gray-200 font-figtree font-regular text-sm">Layout</span>
             </div>
 
@@ -113,7 +113,7 @@
 
           <div class="mb-4">
             <div class="flex flex-row  gap-2">
-              <NuxtImg width="14" alt="icon" src="/icons/floor-plan.svg" />
+              <img width="14" alt="icon" src="/icons/floor-plan.svg" />
               <span class="text-gray-200 font-figtree font-regular text-sm">Floors</span>
             </div>
 
@@ -122,7 +122,7 @@
 
           <div>
             <div class="flex flex-row  gap-2">
-              <NuxtImg width="14" alt="icon" src="/icons/elements-02.svg" />
+              <img width="14" alt="icon" src="/icons/elements-02.svg" />
               <span class="text-gray-200 font-figtree font-regular text-sm">Price</span>
             </div>
 
@@ -149,8 +149,8 @@
             <div v-if="unit.timeAgo" class="text-xs text-gray-300 ml-auto">{{ unit.timeAgo }}</div>
             
           </div>
-        
-          <div class="mt-2">
+       
+          <div class="mt-2">          
             <p class="text-sm font-figtree font-regular text-gray-200">{{ unit.note }}</p>
           </div>
          

@@ -7,8 +7,6 @@ const props = defineProps({
   images: {
     type: Array,
     required: true,
-    // Each image should be an object with at least a src property
-    // { src: string, title?: string, alt?: string }
   },
   // Initial state of the lightbox
   isOpen: {
@@ -76,6 +74,8 @@ defineExpose({
       :imgs="lightboxImages"
       :index="currentIndex"
       @hide="closeLightbox"
+   
     ></vue-easy-lightbox>
   </client-only>
 </template>
+

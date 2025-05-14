@@ -112,7 +112,7 @@ export const properties = [
         favorite: true,
         note: 'hi, please focus on this unit.. best ocean view from the side balcony',
         userName: 'Sabir Al Raf',
-        userAvatar: 'https://i.pravatar.cc/100?img=3',
+        userAvatar: '/icons/profileicon.png',
         timeAgo: '6 hour'
       }
     ],
@@ -262,7 +262,7 @@ export const properties = [
         favorite: true,
         note: 'hi, please focus on this unit.. best ocean view from the side balcony',
         userName: 'Sabir Al Raf',
-        userAvatar: 'https://i.pravatar.cc/100?img=3',
+        userAvatar: '/icons/profileicon.png',
         timeAgo: '6 hour'
       },
       // Additional units for demonstration
@@ -333,3 +333,24 @@ export const properties = [
     paymentBackground: '/bg/bg3.jpg'
   }
 ]
+
+
+export const dummyBroker = {
+  companyLogo: '/img/logo.svg',
+  officeAddress: 'Suite 33, The Walk, JBR, Dubai, UAE',
+  website: 'www.luxhomes.ae',
+  greeting: 'Greetings!',
+  introText: 'Here’s my project offer for you of',
+  unitCount: 7,
+  projectCount: 4,
+  backgroundImage: '/bg/bg1.jpg',
+  scrollText: 'Scroll down to view your offer',
+  agent: {
+    name: 'Subhan Al Farsi',
+    email: 'farsi@realtyhub.com',
+    photo: '',
+    verified: true,
+    mobNo: '+971 55 327 9516',
+    whatsapp: '+971 55 327 8881'
+  }
+};

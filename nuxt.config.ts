@@ -9,7 +9,9 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     'nuxt-easy-lightbox',
   ],
-
+  css: [
+    '~/global.css', 
+  ],
   googleFonts: {
     families:{
       Figtree: [100, 300, 400, 500, 600, 700, 800, 900], 

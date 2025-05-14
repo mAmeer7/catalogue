@@ -5,7 +5,7 @@ import PaymentDetails from '~/components/PropertyDetails/PaymentDetails.vue'
 import UnitContainer from '~/components/PropertyDetails/UnitContainer.vue'
 import MapPlan from '~/components/PropertyDetails/MapPlan.vue'
 import ConstructerDetails from '~/components/PropertyDetails/ConstructerDetails.vue'
-import { properties } from '../data/propertyData' // <-- yeh tumhara JSON file hai
+import { properties } from '../data/propertyData' 
 import BasicDetails from './PropertyDetails/BasicDetails.vue'
 import CommonDetails from './PropertyDetails/CommonDetails.vue'
 </script>

@@ -1,7 +1,70 @@
-// AgentCard.vue - Reusable 
+<script setup>
+import { defineProps, defineEmits } from 'vue'
+
+const props = defineProps({
+  agent: {
+    type: Object,
+    required: true,
+  },
+  showCallButton: {
+    type: Boolean,
+    default: true
+  },
+  callButtonText: {
+    type: String,
+    default: 'Call'
+  },
+  showMessageButton: {
+    type: Boolean,
+    default: true
+  },
+  showWhatsAppButton: {
+    type: Boolean,
+    default: true
+  },
+  customButtons: {
+    type: Array,
+  }
+})
+
+const emit = defineEmits(['call', 'message', 'whatsapp', 'custom-action'])
+
+function getInitials(name) {
+  if (!name) return '?'
+  return name
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase())
+    .join('')
+    .substring(0, 2)
+}
+
+function handleCall() {
+  if (props.agent.phone) {
+    window.location.href = `tel:${props.agent.phone.replace(/\s/g, '')}`
+  }
+  emit('call', props.agent)
+}
+
+function handleMessage() {
+  emit('message', props.agent)
+}
+
+function handleWhatsApp() {
+  if (props.agent.phone) {
+    const phoneNumber = props.agent.phone.replace(/\D/g, '')
+    window.open(`https://wa.me/${phoneNumber}`, '_blank')
+  }
+  emit('whatsapp', props.agent)
+}
+
+function handleCustomButton(button) {
+  emit('custom-action', { button, agent: props.agent })
+}
+</script>
+
 <template>
-  <div class="bg-gray-900 bg-opacity-80 rounded-lg p-4 shadow-lg">
-    <div class="flex flex-col items-center">
+  <div class="bg-gray-900  bg-opacity-80 rounded-lg p-4 shadow-lg">
+    <div class="flex flex-col items-start lg:items-center">
       <div class="flex mb-3">
         <!-- Agent Photo -->
         <div class="w-12 h-12 rounded-full overflow-hidden border-2" :class="agent.verified ? 'border-yellow-400' : 'border-gray-400'">
@@ -21,8 +84,17 @@
               </svg>
             </span>
           </div>
+          <div class="flex items-center  flex-row">
+              <img  src="/icons/call.png" alt="icon" class="w-5 h-5" />
+              <p class="text-gray-300 font-figtree font-regular text-sm">{{ agent.mobNo }}</p>
+            </div>
+            <div class="flex items-center  flex-row">
+              <img  src="/icons/whatsapp.png" alt="icon" class="w-5 h-5" />
+              <p class="text-gray-300 font-figtree font-regular text-sm">{{ agent.whatsapp }}</p>
+            </div>
           <p class="text-gray-300 font-figtree font-regular text-sm">{{ agent.email }}</p>
-          <p v-if="agent.phone" class="text-gray-300 text-sm">{{ agent.phone }}</p>
+         
+         
         </div>
       </div>
       
@@ -78,73 +150,3 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'AgentCard',
-  props: {
-    agent: {
-      type: Object,
-      required: true,
-      // Example structure:
-      // {
-      //   name: 'Nguyen Shane',
-      //   email: 'nguyen.shane@ymail.com',
-      //   phone: '+971 50 123 4567', // optional
-      //   photo: 'path/to/photo.jpg', // optional
-      //   verified: true // optional
-      // }
-    },
-    showCallButton: {
-      type: Boolean,
-      default: true
-    },
-    callButtonText: {
-      type: String,
-      default: 'Call'
-    },
-    showMessageButton: {
-      type: Boolean,
-      default: true
-    },
-    showWhatsAppButton: {
-      type: Boolean,
-      default: true
-    },
-    customButtons: {
-      type: Array,
-      default: () => []
-    }
-  },
-  methods: {
-    getInitials(name) {
-      if (!name) return '?';
-      return name
-        .split(' ')
-        .map(word => word.charAt(0).toUpperCase())
-        .join('')
-        .substring(0, 2);
-    },
-    handleCall() {
-      // If phone number is available, use it
-      if (this.agent.phone) {
-        window.location.href = `tel:${this.agent.phone.replace(/\s/g, '')}`;
-      }
-      this.$emit('call', this.agent);
-    },
-    handleMessage() {
-      this.$emit('message', this.agent);
-    },
-    handleWhatsApp() {
-      // If phone number is available, open WhatsApp
-      if (this.agent.phone) {
-        const phoneNumber = this.agent.phone.replace(/\D/g, '');
-        window.open(`https://wa.me/${phoneNumber}`, '_blank');
-      }
-      this.$emit('whatsapp', this.agent);
-    },
-    handleCustomButton(button) {
-      this.$emit('custom-action', { button, agent: this.agent });
-    }
-  }
-}
-</script>
