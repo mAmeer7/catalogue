@@ -1,10 +1,12 @@
 import jsPDF from 'jspdf'
 import domtoimage from 'dom-to-image'
 import { ref } from 'vue'
+import { nextTick } from 'vue'
 
 export default defineNuxtPlugin(() => {
-  // Create a reactive loading state
+  // Create reactive states
   const isGeneratingPDF = ref(false)
+  const pdfGenerationProgress = ref(0) // Add progress tracking
 
   const generatePDF = async (
     selector: string,
@@ -22,10 +24,28 @@ export default defineNuxtPlugin(() => {
       return false
     }
     
+    // Reset progress
+    pdfGenerationProgress.value = 0
+    
+    element.classList.remove('hidden') // Show section
+    await nextTick() // Wait for DOM render
+    await nextTick() // let DOM re-render with full size
     
     try {
       // Set loading state to true
       isGeneratingPDF.value = true
+      
+      // Update progress - DOM preparation
+      pdfGenerationProgress.value = 10
+      
+      // Start progress simulation for the image conversion part
+      // which is usually the slowest
+      const progressInterval = setInterval(() => {
+        // Don't progress past 70% until we actually have the image
+        if (pdfGenerationProgress.value < 70) {
+          pdfGenerationProgress.value += Math.floor(Math.random() * 3) + 1
+        }
+      }, 200)
       
       // Generate image using dom-to-image
       let imgData
@@ -34,6 +54,11 @@ export default defineNuxtPlugin(() => {
           quality: options.quality,
           bgcolor: '#FFFFFF',
           scale: options.scale,
+          style: {
+            transform: 'scale(1)',
+            transformOrigin: 'top left',
+            width: '1440px',
+          },
         })
       } else {
         imgData = await domtoimage.toPng(element, {
@@ -42,10 +67,17 @@ export default defineNuxtPlugin(() => {
         })
       }
       
+      // Image generated, stop the interval and set progress to 75%
+      clearInterval(progressInterval)
+      pdfGenerationProgress.value = 75
+      
       // Standard A4 width in mm and calculate height proportionally
       const pdfWidth = 210
       const aspectRatio = element.offsetHeight / element.offsetWidth
       const pdfHeight = pdfWidth * aspectRatio
+      
+      // Progress update - PDF initialization
+      pdfGenerationProgress.value = 85
       
       // Create PDF
       const pdf = new jsPDF({
@@ -54,6 +86,9 @@ export default defineNuxtPlugin(() => {
         format: [pdfWidth, pdfHeight]
       })
       console.log("Capturing")
+      
+      // Progress update - PDF adding image
+      pdfGenerationProgress.value = 90
       
       // Add image to PDF
       pdf.addImage(
@@ -64,8 +99,23 @@ export default defineNuxtPlugin(() => {
       )
       console.log("Saving")
       
+      // Progress update - Almost done
+      pdfGenerationProgress.value = 95
+      
       // Save PDF
       pdf.save(fileName)
+      // 👉 Re-hide the element after capturing
+      element.classList.add('hidden')
+      
+      // Complete!
+      pdfGenerationProgress.value = 100
+      
+      // Keep 100% visible briefly before resetting
+      setTimeout(() => {
+        if (!isGeneratingPDF.value) {
+          pdfGenerationProgress.value = 0
+        }
+      }, 1000)
       
       return true
     } catch (error) {
@@ -76,11 +126,12 @@ export default defineNuxtPlugin(() => {
       isGeneratingPDF.value = false
     }
   }
-  
+
   return {
     provide: {
       generatePDF,
-      isGeneratingPDF //  loading state
+      isGeneratingPDF, // loading state
+      pdfGenerationProgress // Add progress percentage
     }
   }
 })

@@ -1,7 +1,34 @@
-/* .nuxt-easy-lightbox-overlay {
-    background-color: rgba(0, 0, 0, 0.7); 
-  }
-  
-  .nuxt-easy-lightbox-wrapper {
-    background-color: white;
-  } */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Force desktop layout classes for PDF generation */
+.force-desktop {
+  /* Force desktop layout regardless of screen size */
+  min-width: 1200px !important;
+}
+
+/* Apply desktop styles explicitly when in PDF mode */
+.pdf-mode .force-desktop [class*="lg:"]:not([class*="max-lg:"]) {
+  display: block !important;
+}
+
+.pdf-mode .force-desktop [class*="hidden"] [class*="lg:block"] {
+  display: block !important;
+}
+
+.pdf-mode .force-desktop [class*="md:"] {
+  /* Apply all md: classes */
+  display: initial !important;
+}
+
+.pdf-mode .force-desktop [class*="sm:"] {
+  /* Apply all sm: classes */
+  display: initial !important;
+}
+
+/* Hide mobile-only elements when in PDF mode */
+.pdf-mode .force-desktop [class*="lg:hidden"] {
+  display: none !important;
+}

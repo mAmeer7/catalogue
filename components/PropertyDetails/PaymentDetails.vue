@@ -11,7 +11,8 @@ const props = defineProps({
     paymentPlanData:{
         type:Array
     },
-    backgroundImage: String
+    backgroundImage: String,
+    isPDF:Boolean
 })
 
 
@@ -24,11 +25,15 @@ const props = defineProps({
         <div class="absolute inset-0 opacity-70 z-1" :style="{
             background: `linear-gradient(to bottom right, black, ${dynamicColor})`
         }"></div>
+        <div :class="isPDF ? 'relative container px-10 py-8' : 'relative container px-5 lg:px-10 py-1 lg:py-8'">
 
-        <div class="relative container px-5 lg:px-10 py-1 lg:py-8">
-            <h2 class="text-[22px] lg:text-[48px] font-figtree font-bold my-10">Payment Plan</h2>
-            <div class="lg:max-w-[60vw] w-[10%]  w-full">
-                <PaymentPlan :paymentItems="props?.paymentPlanData" :dynamicBgColor="props?.dynamicColor" />
+            <h2
+                :class="isPDF ? 'text-[48px] font-figtree font-bold my-10' : 'text-[22px] lg:text-[48px] font-figtree font-bold my-10'">
+                Payment Plan
+            </h2>
+            <div :class="isPDF ? 'max-w-[60vw]  w-full' : 'lg:max-w-[60vw] w-[10%] w-full'">
+
+                <PaymentPlan :isPDF="isPDF" :paymentItems="props?.paymentPlanData" :dynamicBgColor="props?.dynamicColor" />
 
             </div>
         </div>

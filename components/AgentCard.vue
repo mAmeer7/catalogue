@@ -24,7 +24,8 @@ const props = defineProps({
   },
   customButtons: {
     type: Array,
-  }
+  },
+  isPDF:Boolean
 })
 
 const emit = defineEmits(['call', 'message', 'whatsapp', 'custom-action'])
@@ -63,7 +64,9 @@ function handleCustomButton(button) {
 </script>
 
 <template>
-  <div class="bg-gray-900 lg:w-[300px]  bg-opacity-80 rounded-lg p-4 shadow-lg">
+  <div :class="isPDF
+    ? 'bg-gray-900 w-[300px] bg-opacity-80 rounded-lg p-4 shadow-lg'
+    : 'bg-gray-900 lg:w-[300px] bg-opacity-80 rounded-lg p-4 shadow-lg'">
     <div class="flex  flex-col items-start ">
       <div class="flex mb-3">
         <!-- Agent Photo -->
