@@ -29,8 +29,12 @@ const visibleDetails = computed(() => {
 
 
 <template>
-  <div class="relative bg-gray-900 min-h-screen bg-cover bg-center bg-no-repeat text-white"
-    :style="{ backgroundImage: `url(${details.backgroundImage})` }">
+<div
+  :class="isPDF
+    ? 'relative bg-gray-900 h-[1018px] bg-cover bg-center bg-no-repeat text-white'
+    : 'relative bg-gray-900 min-h-screen bg-cover bg-center bg-no-repeat text-white'"
+  :style="{ backgroundImage: `url(${details.backgroundImage})` }"
+>
     <!-- Overlay (optional for darkening) -->
     <div class="absolute inset-0 opacity-70 z-1" :style="{
             background: `linear-gradient(to bottom right, black, ${dynamicColor})`

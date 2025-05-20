@@ -4,9 +4,8 @@ import { ref } from 'vue'
 import { nextTick } from 'vue'
 
 export default defineNuxtPlugin(() => {
-  // Create reactive states
   const isGeneratingPDF = ref(false)
-  const pdfGenerationProgress = ref(0) // Add progress tracking
+  const pdfGenerationProgress = ref(0)
 
   const generatePDF = async (
     selector: string,
@@ -18,36 +17,27 @@ export default defineNuxtPlugin(() => {
     }
   ) => {
     const element = document.querySelector(selector) as HTMLElement
-    
+
     if (!element) {
       console.error(`Element not found: ${selector}`)
       return false
     }
-    
-    // Reset progress
+
     pdfGenerationProgress.value = 0
-    
-    element.classList.remove('hidden') // Show section
-    await nextTick() // Wait for DOM render
-    await nextTick() // let DOM re-render with full size
-    
+    element.classList.remove('hidden')
+    await nextTick()
+    await nextTick()
+
     try {
-      // Set loading state to true
       isGeneratingPDF.value = true
-      
-      // Update progress - DOM preparation
       pdfGenerationProgress.value = 10
-      
-      // Start progress simulation for the image conversion part
-      // which is usually the slowest
+
       const progressInterval = setInterval(() => {
-        // Don't progress past 70% until we actually have the image
         if (pdfGenerationProgress.value < 70) {
           pdfGenerationProgress.value += Math.floor(Math.random() * 3) + 1
         }
       }, 200)
-      
-      // Generate image using dom-to-image
+
       let imgData
       if (options.useCompression) {
         imgData = await domtoimage.toJpeg(element, {
@@ -57,8 +47,8 @@ export default defineNuxtPlugin(() => {
           style: {
             transform: 'scale(1)',
             transformOrigin: 'top left',
-            width: '1440px',
-          },
+            width: '1440px'
+          }
         })
       } else {
         imgData = await domtoimage.toPng(element, {
@@ -66,63 +56,103 @@ export default defineNuxtPlugin(() => {
           scale: options.scale
         })
       }
-      
-      // Image generated, stop the interval and set progress to 75%
+
       clearInterval(progressInterval)
       pdfGenerationProgress.value = 75
-      
-      // Standard A4 width in mm and calculate height proportionally
-      const pdfWidth = 210
-      const aspectRatio = element.offsetHeight / element.offsetWidth
-      const pdfHeight = pdfWidth * aspectRatio
-      
-      // Progress update - PDF initialization
-      pdfGenerationProgress.value = 85
-      
-      // Create PDF
+
       const pdf = new jsPDF({
-        orientation: 'portrait',
+        orientation: 'landscape',
         unit: 'mm',
-        format: [pdfWidth, pdfHeight]
+        format: 'a4'
       })
-      console.log("Capturing")
-      
-      // Progress update - PDF adding image
-      pdfGenerationProgress.value = 90
-      
-      // Add image to PDF
-      pdf.addImage(
-        imgData,
-        options.useCompression ? 'JPEG' : 'PNG',
-        0, 0,
-        pdfWidth, pdfHeight
-      )
-      console.log("Saving")
-      
-      // Progress update - Almost done
-      pdfGenerationProgress.value = 95
-      
-      // Save PDF
-      pdf.save(fileName)
-      // 👉 Re-hide the element after capturing
-      element.classList.add('hidden')
-      
-      // Complete!
-      pdfGenerationProgress.value = 100
-      
-      // Keep 100% visible briefly before resetting
-      setTimeout(() => {
-        if (!isGeneratingPDF.value) {
-          pdfGenerationProgress.value = 0
-        }
-      }, 1000)
-      
+
+      const pageWidth = pdf.internal.pageSize.getWidth()
+      const pageHeight = pdf.internal.pageSize.getHeight()
+
+      const img = new Image()
+      img.src = imgData
+
+      img.onload = function () {
+        const imgWidth = img.width
+        const imgHeight = img.height
+        const ratio = pageWidth / imgWidth
+        const scaledHeight = imgHeight * ratio
+        let position = 0
+
+        pdfGenerationProgress.value = 90
+
+        let pageIndex = 1
+
+while (position < scaledHeight) {
+  const pageCanvas = document.createElement('canvas')
+  const pageContext = pageCanvas.getContext('2d')
+
+  pageCanvas.width = imgWidth
+  pageCanvas.height = pageHeight / ratio
+
+  pageContext.drawImage(
+    img,
+    0,
+    position / ratio,
+    imgWidth,
+    pageCanvas.height,
+    0,
+    0,
+    imgWidth,
+    pageCanvas.height
+  )
+
+  const pageImageData = pageCanvas.toDataURL(
+    options.useCompression ? 'image/jpeg' : 'image/png'
+  )
+
+  pdf.addImage(
+    pageImageData,
+    options.useCompression ? 'JPEG' : 'PNG',
+    0,
+    0,
+    pageWidth,
+    pageHeight
+  )
+
+// Draw background box for page number
+pdf.setFillColor(0, 0, 0, 0.5);  // Black background box with 70% opacity
+pdf.roundedRect(pageWidth - 10, pageHeight - 10, 8, 8, 2, 2, 'F'); // Position and size of box - now square (10x10)
+  
+// Set text properties
+pdf.setFont('helvetica', 'bold');  // Set font to bold
+pdf.setFontSize(10);               // Font size
+pdf.setTextColor(255, 255, 255);   // White text (RGB)
+  
+// Add page number text centered in the box
+pdf.text(`${pageIndex}`, pageWidth - 6, pageHeight - 5, { align: 'center' });
+
+  position += pageHeight
+  pageIndex++
+
+  if (position < scaledHeight) {
+    pdf.addPage()
+  }
+}
+
+        pdfGenerationProgress.value = 95
+        pdf.save(fileName)
+
+        element.classList.add('hidden')
+        pdfGenerationProgress.value = 100
+
+        setTimeout(() => {
+          if (!isGeneratingPDF.value) {
+            pdfGenerationProgress.value = 0
+          }
+        }, 1000)
+      }
+
       return true
     } catch (error) {
       console.error('PDF generation failed:', error)
       throw error
     } finally {
-      // Always reset loading state when finished, whether success or error
       isGeneratingPDF.value = false
     }
   }
@@ -130,8 +160,8 @@ export default defineNuxtPlugin(() => {
   return {
     provide: {
       generatePDF,
-      isGeneratingPDF, // loading state
-      pdfGenerationProgress // Add progress percentage
+      isGeneratingPDF,
+      pdfGenerationProgress
     }
   }
 })

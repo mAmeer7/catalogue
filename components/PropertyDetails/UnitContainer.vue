@@ -78,7 +78,7 @@
 <template>
   <div>
     <div v-for="(group, groupIndex) in unitGroups" :key="groupIndex"
- :class="isPDF ? 'relative h-screen bg-cover bg-center bg-no-repeat py-16 text-white' : 'relative lg:h-screen bg-cover bg-center bg-no-repeat py-10 lg:py-16 text-white'"
+ :class="isPDF ? 'relative h-[1018px] bg-cover bg-center bg-no-repeat py-16 text-white' : 'relative lg:min-h-screen bg-cover bg-center bg-no-repeat py-10 lg:py-16 text-white'"
       :style="{ backgroundImage: `url('/bg/bg4.jpg')` }">
       <!-- Overlay -->
       <div class="absolute inset-0 opacity-70 z-1" :style="{

@@ -32,7 +32,7 @@ const IconMapPin = defineComponent({
 
 
 <template>
-  <div class="relative bg-gray-900 min-h-[100vh] bg-cover bg-center bg-no-repeat text-white"
+  <div :class="isPDF ? 'relative bg-gray-900 h-[1018px] bg-cover bg-center bg-no-repeat text-white' : 'relative bg-gray-900 min-h-screen bg-cover bg-center bg-no-repeat text-white'"
     :style="{ backgroundImage: `url(${details?.background})` }">
     <!-- Overlay (optional for darkening) -->
     <div class="absolute inset-0 bg-black bg-opacity-50 z-0"></div>

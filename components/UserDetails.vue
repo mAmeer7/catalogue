@@ -11,7 +11,7 @@ const props = defineProps({
 
 
 <template>
-    <div class="relative w-full h-screen bg-gray-900 overflow-hidden">
+    <div :class="isPDF ? 'relative w-full h-[1018px] bg-gray-900 overflow-hidden touch-none' : 'relative w-full h-screen bg-gray-900 overflow-hidden touch-none'">
         <!-- Background skyscrapers image - Using a gradient overlay -->
         <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 opacity-50"></div>
 

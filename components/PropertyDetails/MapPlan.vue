@@ -72,7 +72,7 @@ const showLightbox = (item) => {
 <!-- Gallery Component -->
 <template>
   <div
-    :class="isPDF ? 'relative min-h-screen bg-cover bg-center bg-no-repeat py-16 text-white' : 'relative min-h-screen bg-cover bg-center bg-no-repeat py-10 lg:py-16 text-white'"
+    :class="isPDF ? 'relative h-[1018px] bg-cover bg-center bg-no-repeat py-16 text-white' : 'relative min-h-screen bg-cover bg-center bg-no-repeat py-10 lg:py-16 text-white'"
     :style="{ backgroundImage: `url(${backgroundImage})` }">
 
     <!-- Overlay -->

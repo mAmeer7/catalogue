@@ -14,7 +14,7 @@
     }>()
 </script>
 <template>
-    <div :class=" isPDF? 'relative min-h-screen bg-cover bg-center bg-no-repeat py-16 px-6 text-white' :'relative min-h-screen bg-cover bg-center bg-no-repeat py-10 lg:py-16 lg:px-6 text-white'"
+    <div :class=" isPDF? 'relative  h-[1018px]  bg-cover bg-center bg-no-repeat py-16 px-6 text-white' :'relative min-h-screen bg-cover bg-center bg-no-repeat py-10 lg:py-16 lg:px-6 text-white'"
         :style="{ backgroundImage: `url(${backgroundImage})`  }">
         <!-- Overlay -->
         <div class="absolute inset-0 opacity-70 z-1" :style="{
@@ -33,7 +33,7 @@
             <div :class="isPDF
                 ? 'grid grid-cols-6 gap-x-4 gap-y-6 px-4 sm:px-0'
                 : 'grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-6 px-4 sm:px-0'">
-                <AmenityCard v-for="(item, index) in props?.amenities" :key="index" :icon="item.icon"
+                <AmenityCard v-for="(item, index) in props?.amenities"     :isPDF="isPDF"   :key="index" :icon="item.icon"
                     :label="item.label" :dynamicBgColor="dynamicColor" />
             </div>
         </div>

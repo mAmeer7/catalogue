@@ -43,13 +43,15 @@
 
 <!-- UnitCard.vue -->
 <template>
-  <div
+<div
   :class="[
-    'p-5 lg:w-[420px] rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:transform hover:scale-102',
-    unit.note ? 'lg:h-[376px]' : 'lg:h-[276px]'
+    'p-5 rounded-2xl overflow-hidden shadow-lg transition-transform duration-300 hover:transform hover:scale-102',
+    unit.note ? 'lg:h-[376px]' : 'lg:h-[276px]',
+    isPDF ? 'w-[420px]' : 'lg:w-[420px]'
   ]"
   :style="{ backgroundColor: dynamicBgColor }"
 >
+
 
 
 
