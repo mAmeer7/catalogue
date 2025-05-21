@@ -10,10 +10,10 @@ const router = useRouter()
 
 const handleDownload = async () => {
   try {
-    // await $generatePDF('#pdf-section', 'brochure.pdf')
-    // setTimeout(() => {
-    //   router.back()
-    // }, 1000)
+    await $generatePDF('#pdf-section', 'brochure.pdf')
+    setTimeout(() => {
+      router.back()
+    }, 1000)
   } catch (error) {
     console.error('Error generating PDF:', error)
   }
