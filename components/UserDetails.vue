@@ -1,17 +1,29 @@
-<script setup>
-import AgentCard from './AgentCard.vue';
+<script setup lang="ts">
+import AgentCard from './AgentCard.vue'
+import { ref, watch } from 'vue'
 
+const props = defineProps<{
+  details: any
+  isPDF?: boolean
+  properties?: any[]
+}>()
 
-const props = defineProps({
-  details:Object,
-  isPDF:Boolean
+// default empty array agar undefined ho toh
+const properties = ref(props.properties ?? [])
+
+watch(() => props.properties, (newVal) => {
+  properties.value = newVal ?? []
 })
+
+const { totalUnits } = useTotalUnits(properties)
+
 </script>
 
 
 
+
 <template>
-    <div :class="isPDF ? 'relative w-full h-[1018px] bg-gray-900 overflow-hidden touch-none' : 'relative w-full h-screen bg-gray-900 overflow-hidden touch-none'">
+    <div :class="isPDF ? 'relative w-full pdf-height  bg-gray-900 overflow-hidden touch-none' : 'relative w-full h-screen bg-gray-900 overflow-hidden touch-none'">
         <!-- Background skyscrapers image - Using a gradient overlay -->
         <div class="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 opacity-50"></div>
 
@@ -76,8 +88,8 @@ const props = defineProps({
                     ? 'text-white absolute bottom-16 left-10 text-[24px] font-figtree'
                     : 'text-white lg:absolute bottom-16 left-10 lg:text-[24px] max-sm:mt-[100px] font-figtree'
                     ">
-                    {{ `${details?.greeting} ${details?.introText} ${details?.unitCount} units in
-                    ${details?.projectCount} projects` }}
+                    {{ `${details?.greeting} ${details?.introText} ${totalUnits} units in
+                    ${properties?.length} projects` }}
                 </h2>
 
 

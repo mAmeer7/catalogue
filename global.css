@@ -28,6 +28,11 @@
   display: initial !important;
 }
 
+
+.pdf-height{
+  height:1053.4px;
+}
+
 /* Hide mobile-only elements when in PDF mode */
 .pdf-mode .force-desktop [class*="lg:hidden"] {
   display: none !important;

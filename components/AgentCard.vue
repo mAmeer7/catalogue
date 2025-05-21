@@ -65,13 +65,12 @@ function handleCustomButton(button) {
 
 <template>
   <div :class="isPDF
-    ? 'bg-gray-900 min-w-[350px] bg-opacity-80 rounded-lg p-4 shadow-lg'
+    ? 'bg-gray-900 min-w-[350px]   pt-7 bg-opacity-80 rounded-lg px-4 pb-4 shadow-lg'
     : 'bg-gray-900 lg:min-w-[350px] bg-opacity-80 rounded-lg p-4 shadow-lg'">
     <div class="flex  flex-col items-start ">
-      <div class="flex mb-3">
+      <div class="flex ">
         <!-- Agent Photo -->
-        <div class="w-12 h-12 rounded-sm overflow-hidden border-2"
-          :class="agent.verified ? 'border-yellow-400' : 'border-gray-400'">
+        <div :class="[isPDF? 'w-[110px] h-[110px]':'w-[90px] h-[90px]' ,'rounded-sm overflow-hidden border-2 border-yellow-400']">
           <img v-if="agent.photo" :src="agent.photo" :alt="agent.name" class="w-full h-full object-cover">
           <div v-else class="w-full h-full bg-gray-300 flex items-center justify-center text-gray-600">
             {{ getInitials(agent.name) }}
@@ -79,14 +78,19 @@ function handleCustomButton(button) {
         </div>
 
         <!-- Agent Info -->
-        <div class="ml-3">
-          <div class="flex items-center">
-            <h3 :class="['text-white font-figtree font-semibold', isPDF ? 'text-[20px]' : 'text-[17px]']">
+            <div class="ml-3">
+              <div class="flex items-center">
+          <h3 :class="['text-white font-figtree font-semibold', isPDF ? 'text-[20px]' : 'text-[17px]']">
               {{ agent.name }}
-              <span v-if="agent.verified" class="verified-badge ml-1"></span>
-            </h3>
-          
-          </div>
+              <img
+                v-if="agent.verified"
+                src="/icons/verified.png"
+                alt="icon"
+                class="inline-block w-3 h-3   align-top mt-2"
+              />
+              </h3>
+            </div>
+
           <div v-if="agent.mobNo" class="flex items-center  flex-row">
             <img src="/icons/call.png" alt="icon" class="w-5 h-5" />
             <p :class="['text-gray-300 font-figtree font-regular', isPDF? 'text-[18px]':'text-[15px]']">{{ agent.mobNo
@@ -100,7 +104,7 @@ function handleCustomButton(button) {
           </div>
 
           <div v-if="agent.email" class="flex items-center gap-2  flex-row">
-            <img src="/icons/mail.png" alt="icon" class="w-4 h-4 ml-1" />
+            <img src="/icons/mail.png" alt="icon" class="w-4 h-4 ml-[2px]" />
             <p :class="['text-gray-300 font-figtree font-regular', isPDF? 'text-[18px]':'text-[15px]']">{{ agent.email
               }}</p>
           </div>
@@ -111,7 +115,7 @@ function handleCustomButton(button) {
       </div>
 
       <!-- Contact Buttons -->
-      <div class="flex gap-2 w-full">
+      <div class="flex gap-2 w-full mt-3 ">
         <!-- Call Button -->
         <button v-if="!isPDF"
           class="flex-grow bg-blue-500 hover:bg-blue-600 max-w-[300px] font-figtree text-white py-2 px-4 rounded-md flex items-center justify-center transition-colors"

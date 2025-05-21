@@ -59,6 +59,7 @@ export default defineNuxtPlugin(() => {
 
       clearInterval(progressInterval)
       pdfGenerationProgress.value = 75
+      console.log(  pdfGenerationProgress.value)
 
       const pdf = new jsPDF({
         orientation: 'landscape',
@@ -140,6 +141,7 @@ pdf.text(`${pageIndex}`, pageWidth - 6, pageHeight - 5, { align: 'center' });
 
         element.classList.add('hidden')
         pdfGenerationProgress.value = 100
+        console.error('PDF generation')
 
         setTimeout(() => {
           if (!isGeneratingPDF.value) {

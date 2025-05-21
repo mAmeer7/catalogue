@@ -29,7 +29,7 @@ const visibleDetails = computed(() => {
 
 <template>
   <div :class="isPDF
-    ? 'relative bg-gray-900 h-[1018px] bg-cover bg-center bg-no-repeat text-white'
+    ? 'relative bg-gray-900 pdf-height bg-cover bg-center bg-no-repeat text-white'
     : 'relative bg-gray-900 min-h-screen bg-cover bg-center bg-no-repeat text-white'"
     :style="{ backgroundImage: `url(${builder?.backgroundImage})` }">
     <!-- Overlay (optional for darkening) -->

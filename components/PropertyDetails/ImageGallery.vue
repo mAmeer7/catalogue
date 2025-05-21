@@ -51,7 +51,7 @@ const getImageIndex = (chunkIndex, imagePosition) => {
   <div 
     v-for="(chunk, chunkIndex) in imageChunks" :key="chunkIndex"
     :class="isPDF
-      ? 'relative bg-cover h-[1018px] bg-center bg-no-repeat py-16 text-white'
+      ? 'relative bg-cover pdf-height bg-center bg-no-repeat py-16 text-white'
       : 'relative bg-cover min-h-screen bg-center bg-no-repeat py-10 lg:py-16 text-white'"
     :style="{ backgroundImage: `url(${backgroundImage})` }">
     <!-- Overlay -->

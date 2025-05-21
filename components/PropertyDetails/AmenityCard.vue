@@ -3,7 +3,7 @@
     icon: any
     label: string
     dynamicBgColor: string,
-    isPDF:Boolean
+    isPDF:boolean  | undefined
   }>()
 </script>
 

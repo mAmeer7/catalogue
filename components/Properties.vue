@@ -5,14 +5,32 @@ import PaymentDetails from '~/components/PropertyDetails/PaymentDetails.vue'
 import UnitContainer from '~/components/PropertyDetails/UnitContainer.vue'
 import MapPlan from '~/components/PropertyDetails/MapPlan.vue'
 import ConstructerDetails from '~/components/PropertyDetails/ConstructerDetails.vue'
-import { properties } from '../data/propertyData' 
 import BasicDetails from './PropertyDetails/BasicDetails.vue'
 import CommonDetails from './PropertyDetails/CommonDetails.vue'
 
+interface Property {
+  id: number;
+  title: string;
+  dynamicColor: string;
+  propDetails: any;
+  builderDetails: any;
+  areaDetails: any;
+  amenities: any[];
+  architectureImages: any[];
+  interiorImages: any[];
+  amenitiesImages: any[];
+  paymentPlanData: any[];
+  units: any;
+  planImages: any[];
+  mapBackground: string;
+  galleryBackground: string;
+  amenityBackground: string;
+  paymentBackground: string;
+}
 
-const props= defineProps({
-  isPDF:Boolean
-})
+const props = defineProps<{ isPDF?: boolean; properties: Property[] }>();
+
+
 </script>
 
 <template>
@@ -38,7 +56,7 @@ const props= defineProps({
     <CommonDetails :dynamicColor="property.dynamicColor"  :isPDF="isPDF"  :details="property?.areaDetails" />
 
     <!-- Map Plan -->
-    <MapPlan v-if="property.planImages"  :isPDF="isPDF"  title="Map Plan" :items="property.planImages"
+    <MapPlan v-if="property.planImages"  :isPDF="isPDF"  title="Master Plan" :items="property.planImages"
       :backgroundImage="property.mapBackground || '/bg/bg4.jpg'" :dynamicColor="property.dynamicColor" />
 
     <!-- Unit Specifications -->

@@ -10,11 +10,11 @@
         amenities: Amenity[]
         dynamicColor: string,
         backgroundImage:string,
-        isPDF:Boolean
+        isPDF:boolean | undefined
     }>()
 </script>
 <template>
-    <div :class=" isPDF? 'relative  h-[1018px]  bg-cover bg-center bg-no-repeat py-16 px-6 text-white' :'relative min-h-screen bg-cover bg-center bg-no-repeat py-10 lg:py-16 lg:px-6 text-white'"
+    <div :class=" isPDF? 'relative  pdf-height  bg-cover bg-center bg-no-repeat py-16 px-6 text-white' :'relative min-h-screen bg-cover bg-center bg-no-repeat py-10 lg:py-16 lg:px-6 text-white'"
         :style="{ backgroundImage: `url(${backgroundImage})`  }">
         <!-- Overlay -->
         <div class="absolute inset-0 opacity-70 z-1" :style="{

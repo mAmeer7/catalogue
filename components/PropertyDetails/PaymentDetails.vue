@@ -20,7 +20,7 @@ const props = defineProps({
 <template>
 
     <div :class="
-      isPDF ? 'relative h-[1018px] bg-gray-900 bg-cover bg-center bg-no-repeat text-white' : 'relative min-h-screen bg-gray-900 bg-cover bg-center bg-no-repeat text-white'
+      isPDF ? 'relative pdf-height bg-gray-900 bg-cover bg-center bg-no-repeat text-white' : 'relative min-h-screen bg-gray-900 bg-cover bg-center bg-no-repeat text-white'
     "
         :style="{ backgroundImage: `url(${backgroundImage})` }">
         <!-- Overlay (optional for darkening) -->
