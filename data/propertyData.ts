@@ -348,9 +348,9 @@ export const dummyBroker = {
   backgroundImage: '/bg/bg1.jpg',
   scrollText: 'Scroll down to view your offer',
   agent: {
-    name: 'Subhan Al Farsi',
-    email: 'farsi@realtyhub.com',
-    photo: '',
+    name: 'Sultan Nur al-Hadi Abdur-Rahman al-Din',
+    email: 'sultan.nur.rahman.aldin@century21.com',
+    photo: '/icons/profileicon.png',
     verified: true,
     mobNo: '+971 55 327 9516',
     whatsapp: '+971 55 327 8881'

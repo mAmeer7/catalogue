@@ -8,7 +8,7 @@ const props = defineProps({
   },
   showCallButton: {
     type: Boolean,
-    default: true
+    default: false
   },
   callButtonText: {
     type: String,
@@ -16,15 +16,16 @@ const props = defineProps({
   },
   showMessageButton: {
     type: Boolean,
-    default: true
+    default: false
   },
   showWhatsAppButton: {
     type: Boolean,
-    default: true
+    default: false
   },
   customButtons: {
     type: Array,
-  }
+  },
+  isPDF:Boolean
 })
 
 const emit = defineEmits(['call', 'message', 'whatsapp', 'custom-action'])
@@ -63,11 +64,13 @@ function handleCustomButton(button) {
 </script>
 
 <template>
-  <div class="bg-gray-900 lg:w-[300px]  bg-opacity-80 rounded-lg p-4 shadow-lg">
+  <div :class="isPDF
+    ? 'bg-gray-900 min-w-[350px] bg-opacity-80 rounded-lg p-4 shadow-lg'
+    : 'bg-gray-900 lg:min-w-[350px] bg-opacity-80 rounded-lg p-4 shadow-lg'">
     <div class="flex  flex-col items-start ">
       <div class="flex mb-3">
         <!-- Agent Photo -->
-        <div class="w-12 h-12 rounded-full overflow-hidden border-2"
+        <div class="w-12 h-12 rounded-sm overflow-hidden border-2"
           :class="agent.verified ? 'border-yellow-400' : 'border-gray-400'">
           <img v-if="agent.photo" :src="agent.photo" :alt="agent.name" class="w-full h-full object-cover">
           <div v-else class="w-full h-full bg-gray-300 flex items-center justify-center text-gray-600">
@@ -78,25 +81,30 @@ function handleCustomButton(button) {
         <!-- Agent Info -->
         <div class="ml-3">
           <div class="flex items-center">
-            <h3 class="text-white font-figtree font-semibold">{{ agent.name }}</h3>
-            <span v-if="agent.verified" class="ml-1 text-yellow-400">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                  clip-rule="evenodd"></path>
-              </svg>
-            </span>
+            <h3 :class="['text-white font-figtree font-semibold', isPDF ? 'text-[20px]' : 'text-[17px]']">
+              {{ agent.name }}
+              <span v-if="agent.verified" class="verified-badge ml-1"></span>
+            </h3>
+          
           </div>
           <div v-if="agent.mobNo" class="flex items-center  flex-row">
             <img src="/icons/call.png" alt="icon" class="w-5 h-5" />
-            <p class="text-gray-300 font-figtree font-regular text-sm">{{ agent.mobNo }}</p>
+            <p :class="['text-gray-300 font-figtree font-regular', isPDF? 'text-[18px]':'text-[15px]']">{{ agent.mobNo
+              }}</p>
           </div>
 
           <div v-if="agent.whatsapp" class="flex items-center  flex-row">
             <img src="/icons/whatsapp.png" alt="icon" class="w-5 h-5" />
-            <p class="text-gray-300 font-figtree font-regular text-sm">{{ agent.whatsapp }}</p>
+            <p :class="['text-gray-300 font-figtree font-regular', isPDF? 'text-[18px]':'text-[15px]']">{{
+              agent.whatsapp }}</p>
           </div>
-          <p class="text-gray-300 font-figtree font-regular text-sm">{{ agent.email }}</p>
+
+          <div v-if="agent.email" class="flex items-center gap-2  flex-row">
+            <img src="/icons/mail.png" alt="icon" class="w-4 h-4 ml-1" />
+            <p :class="['text-gray-300 font-figtree font-regular', isPDF? 'text-[18px]':'text-[15px]']">{{ agent.email
+              }}</p>
+          </div>
+
 
 
         </div>
@@ -105,8 +113,8 @@ function handleCustomButton(button) {
       <!-- Contact Buttons -->
       <div class="flex gap-2 w-full">
         <!-- Call Button -->
-        <button v-if="showCallButton"
-          class="flex-grow bg-blue-500 hover:bg-blue-600 font-figtree text-white py-2 px-4 rounded-md flex items-center justify-center transition-colors"
+        <button v-if="!isPDF"
+          class="flex-grow bg-blue-500 hover:bg-blue-600 max-w-[300px] font-figtree text-white py-2 px-4 rounded-md flex items-center justify-center transition-colors"
           @click="handleCall">
           <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -117,7 +125,7 @@ function handleCustomButton(button) {
         </button>
 
         <!-- Message Button -->
-        <button v-if="showMessageButton"
+        <button v-if="!isPDF"
           class="w-10 h-10 bg-orange-500 hover:bg-orange-600 text-white rounded-md flex items-center justify-center transition-colors"
           @click="handleMessage">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -128,7 +136,7 @@ function handleCustomButton(button) {
         </button>
 
         <!-- WhatsApp Button -->
-        <button v-if="showWhatsAppButton"
+        <button v-if="!isPDF"
           class="w-10 h-10 bg-green-500 hover:bg-green-600 text-white rounded-md flex items-center justify-center transition-colors"
           @click="handleWhatsApp">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
