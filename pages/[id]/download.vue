@@ -20,7 +20,7 @@ const handleDownload = async () => {
 }
 
 onMounted(() => {
-  // Delay 1.5 seconds before starting download
+
   setTimeout(() => {
     handleDownload()
     console.log("trigrred")
@@ -32,7 +32,7 @@ onMounted(() => {
 
 <template>
     <div class="relative">
-        <!-- Loader Overlay -->
+        <!-- Loader -->
         <div v-if="$isGeneratingPDF"
             class="fixed inset-0 bg-white/80 backdrop-blur-sm z-50 flex items-center justify-center h-screen w-screen">
             <div class="text-center">
